@@ -15,20 +15,30 @@ const NSString *WUKey = @"4ef3ba9d0ac7d8b9";
 /// Get the url of the first image resulting from a google image search of the provided query
 - (NSString*)getImageUrl:(NSString*)query
 {
+    // Construct query url
     NSString *urlString = [NSString stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@", query];
     NSString *webStringUrl = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:webStringUrl];
     
+    // Get response data
     NSError *error;
     NSData *queryData = [NSData dataWithContentsOfURL:url options:0 error:&error];
-    
     id queryResults = [NSJSONSerialization JSONObjectWithData:queryData options:0 error:&error];
-    
     NSDictionary *responseData = queryResults[@"responseData"];
-    NSDictionary *imageData = responseData[@"results"][0];
     
+    // Get image url from response data
+    int i = 0;
+    NSDictionary *imageData = responseData[@"results"][i];
+    
+    // Get next image url if current url does not end in .jpg/.png/.gif
     NSString *imageUrl = imageData[@"url"];
+    while ([imageUrl characterAtIndex:[imageUrl length]-4] != L'.') {
+        i++;
+        imageData = responseData[@"results"][i];
+        imageUrl = imageData[@"url"];
+    }
     
+    // Return image url
     return imageUrl;
 }
 
@@ -43,24 +53,40 @@ const NSString *WUKey = @"4ef3ba9d0ac7d8b9";
 - (WAWeather*)getCurrentWeatherForCity:(NSString*)city
                                  state:(NSString*)state
 {
+    // Construct query url
     NSString *urlString = [NSString stringWithFormat:@"http://api.wunderground.com/api/%@/conditions/q/%@/%@.json", WUKey, state, city];
     NSString *webStringUrl = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:webStringUrl];
     
+    // Get response data, check for errors
     NSError *error;
     NSData *weatherData = [NSData dataWithContentsOfURL:url options:0 error:&error];
-    
+    if (weatherData == nil || error != nil) {
+        return nil;
+    }
     id weatherResults = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&error];
+    if (error != nil) {
+        return nil;
+    }
+    NSDictionary *response = weatherResults[@"response"];
+    if (response == nil || ![response isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
     
-//    NSDictionary *response = weatherResults[@"response"];
+    // Get current observation data, check for errors
     NSDictionary *currentObservation = weatherResults[@"current_observation"];
+    if (currentObservation == nil) {
+        return nil;
+    }
     
+    // Extract weather information from current observation data
     NSString *condition = currentObservation[@"weather"];
     NSString *icon = currentObservation[@"icon_url"];
     double tempValue = [currentObservation[@"temp_f"] doubleValue];
     NSString *temperature = [NSString stringWithFormat:@"%.0f", tempValue];
     NSString *time = [currentObservation[@"observation_time"] componentsSeparatedByString:@", "][1];
     
+    // Initialize a new WAWeather instance and return it
     WAWeather *currentWeather = [[WAWeather alloc] initWithCondition:condition
                                                                 icon:icon
                                                          temperature:temperature
@@ -74,18 +100,33 @@ const NSString *WUKey = @"4ef3ba9d0ac7d8b9";
 - (NSArray*)getHourlyForecastForCity:(NSString*)city
                               state:(NSString*)state
 {
+    // Construct query url
     NSString *urlString = [NSString stringWithFormat:@"http://api.wunderground.com/api/%@/hourly/q/%@/%@.json", WUKey, state, city];
     NSString *webStringUrl = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:webStringUrl];
     
+    // Get response data, check for errors
     NSError *error;
     NSData *weatherData = [NSData dataWithContentsOfURL:url options:0 error:&error];
-    
+    if (weatherData == nil || error != nil) {
+        return nil;
+    }
     id weatherResults = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&error];
+    if (error != nil) {
+        return nil;
+    }
+    NSDictionary *response = weatherResults[@"response"];
+    if (response == nil || ![response isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
     
-    //    NSDictionary *response = weatherResults[@"response"];
+    // Get hourly forecast data, check for errors
     NSArray *forecast = weatherResults[@"hourly_forecast"];
+    if (forecast == nil) {
+        return nil;
+    }
     
+    // Extract weather information from hourly forecast data
     NSMutableArray *hourlyForecast = [NSMutableArray array];
     for (int i=0; i<=5; i++) {
         NSDictionary *forecastHour = forecast[i];
@@ -103,20 +144,35 @@ const NSString *WUKey = @"4ef3ba9d0ac7d8b9";
 - (NSArray*)getDailyForecastForCity:(NSString*)city
                                  state:(NSString*)state
 {
+    // Construct query url
     NSString *urlString = [NSString stringWithFormat:@"http://api.wunderground.com/api/%@/forecast10day/q/%@/%@.json", WUKey, state, city];
     NSString *webStringUrl = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSURL *url = [NSURL URLWithString:webStringUrl];
     
+    // Get response data, check for errors
     NSError *error;
     NSData *weatherData = [NSData dataWithContentsOfURL:url options:0 error:&error];
-    
+    if (weatherData == nil || error != nil) {
+        return nil;
+    }
     id weatherResults = [NSJSONSerialization JSONObjectWithData:weatherData options:0 error:&error];
+    if (error != nil) {
+        return nil;
+    }
+    NSDictionary *response = weatherResults[@"response"];
+    if (response == nil || ![response isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
     
-//    NSDictionary *response = weatherResults[@"response"];
+    // Get daily forecast data, check for errors
     NSDictionary *forecast = weatherResults[@"forecast"];
+    if (forecast == nil) {
+        return nil;
+    }
     NSDictionary *simpleForecast = forecast[@"simpleforecast"];
     NSArray *simpleForecastDay = simpleForecast[@"forecastday"];
     
+    // Extract weather information from daily forecast data
     NSMutableArray *dailyForecast = [NSMutableArray array];
     for (int i=1; i<=6; i++) {
         NSDictionary *simpleForecastPeriod = simpleForecastDay[i];
