@@ -68,7 +68,7 @@
         // Create and initialize height variables for various views
         CGFloat cityHeight = 20;
         CGFloat timeHeight = 18;
-        CGFloat temperatureHeight = 110;
+        CGFloat temperatureHeight = 90;
         CGFloat iconHeight = 30;
         
         // Create frames for labels and icon views
@@ -104,7 +104,7 @@
         _temperatureLabel.backgroundColor = [UIColor clearColor];
         _temperatureLabel.textColor = [UIColor whiteColor];
         _temperatureLabel.text = @"0°";
-        _temperatureLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:120];
+        _temperatureLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:110];
         [header addSubview:_temperatureLabel];
         
         _conditionsLabel = [[UILabel alloc] initWithFrame:conditionsFrame];
@@ -168,11 +168,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // TODO - Get number of rows for daily and hourly forecassts
-//    if (section == 0) {
-//        return MIN(hourlyForecast count, 6) + 1;
-//    }
-//    return MIN(dailyForecast count, 6) + 1;
     return 7;
 }
 

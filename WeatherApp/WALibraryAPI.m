@@ -35,15 +35,13 @@
     return _sharedInstance;
 }
 
-/// Initializes an instance of LibraryAPI
+/// Initializes an instance of WALibraryAPI
 - (id)init
 {
     self = [super init];
     if (self) {
         persistencyManager = [[WAPersistencyManager alloc] init];
         httpClient = [[WAHTTPClient alloc] init];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImageUrl2:) name:@"WAGetImageURLNotification" object:nil];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getCurrentWeather:) name:@"WAGetCurrentWeatherNotification" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadImage:) name:@"WADownloadImageNotification" object:nil];
     }
     return self;
@@ -75,21 +73,6 @@
     return [httpClient getImageUrl:query];
 }
 
-///// Get the url of the first image resulting from a google image search of the provided query
-//- (void)getImageUrl2:(NSNotification*)notification
-//{
-//    WACity *city = notification.userInfo[@"city"];
-//    NSString *query = notification.userInfo[@"query"];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        // Display image in image view and use PersistencyManager to save image locally
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            city.imgUrl = [self getImageUrl:query]
-//            ;
-//        });
-//    });
-//}
-
 /// Downloads the specified images from the given urls
 - (void)downloadImage:(NSNotification*)notification
 {
@@ -119,21 +102,6 @@
 {
     [persistencyManager saveCities];
 }
-
-///// Fetches current weather conditions for the provided location
-//- (void)getCurrentWeather:(NSNotification*)notification
-//{
-//    WACity *city = notification.userInfo[@"city"];
-//    NSString *name = notification.userInfo[@"name"];
-//    NSString *state = notification.userInfo[@"state"];
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        
-//        // Display image in image view and use PersistencyManager to save image locally
-//        dispatch_sync(dispatch_get_main_queue(), ^{
-//            city.currentWeather = [self getCurrentWeatherForCity:name state:state];
-//        });
-//    });
-//}
 
 /// Fetches current weather conditions for the provided location
 - (WAWeather*)getCurrentWeatherForCity:(NSString*)city

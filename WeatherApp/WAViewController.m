@@ -91,7 +91,6 @@
 {
     // Retreive UIIMageView and image URL from notification
     WACityView *cityView = notification.userInfo[@"cityView"];
-    
     WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:cityView.city state:cityView.state];
     cityView.timeLabel.text = currentWeather.time;
     cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
@@ -155,13 +154,19 @@
 {
     WACity *city = allCities[index];
     WACityView *cityView = [[WACityView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-VIEWS_OFFSET*2, self.view.frame.size.height-TOOLBAR_HEIGHT) name:city.name state:city.state bgUrl:city.imgUrl];
-    WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:city.name state:city.state];
-    cityView.timeLabel.text = currentWeather.time;
-    cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
-    cityView.conditionsLabel.text = currentWeather.condition;
-    cityView.temperatureLabel.text = [NSString stringWithFormat:@"%@°", currentWeather.temperature];
-    cityView.hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:city.name state:city.state];
-    cityView.dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:city.name state:city.state];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Update weather information for city view
+        dispatch_async(dispatch_get_main_queue(), ^{
+            WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:cityView.city state:cityView.state];
+            cityView.timeLabel.text = currentWeather.time;
+            cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
+            cityView.conditionsLabel.text = currentWeather.condition;
+            cityView.temperatureLabel.text = [NSString stringWithFormat:@"%@°", currentWeather.temperature];
+            cityView.hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:cityView.city state:cityView.state];
+            cityView.dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:cityView.city state:cityView.state];
+        });
+    });
     
     return cityView;
 }
