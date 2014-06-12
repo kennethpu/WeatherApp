@@ -29,13 +29,15 @@ const NSString *WUKey = @"4ef3ba9d0ac7d8b9";
     // Get image url from response data
     int i = 0;
     NSDictionary *imageData = responseData[@"results"][i];
+    NSString *imageUrl = imageData[@"url"];
+//    float imgHeight = [imageData[@"height"] floatValue];
     
     // Get next image url if current url does not end in .jpg/.png/.gif
-    NSString *imageUrl = imageData[@"url"];
-    while ([imageUrl characterAtIndex:[imageUrl length]-4] != L'.') {
+    while ([imageUrl characterAtIndex:[imageUrl length]-4] != L'.') {// || imgHeight < 300) {
         i++;
         imageData = responseData[@"results"][i];
         imageUrl = imageData[@"url"];
+//        imgHeight = [imageData[@"height"] floatValue];
     }
     
     // Return image url
