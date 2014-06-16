@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BB174F301947A6CF00ED6854 /* WAHorizontalScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */; };
+		BB6D1C12194BADE400318106 /* iconMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6D1C11194BADE400318106 /* iconMap.plist */; };
 		BBBBBC3119443977007B4748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3019443977007B4748 /* Foundation.framework */; };
 		BBBBBC3319443977007B4748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3219443977007B4748 /* CoreGraphics.framework */; };
 		BBBBBC3519443977007B4748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3419443977007B4748 /* UIKit.framework */; };
@@ -42,6 +43,7 @@
 /* Begin PBXFileReference section */
 		BB174F2E1947A6CE00ED6854 /* WAHorizontalScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHorizontalScroller.h; sourceTree = "<group>"; };
 		BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHorizontalScroller.m; sourceTree = "<group>"; };
+		BB6D1C11194BADE400318106 /* iconMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = iconMap.plist; sourceTree = "<group>"; };
 		BBBBBC2D19443977007B4748 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBBBBC3019443977007B4748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BBBBBC3219443977007B4748 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -179,6 +181,7 @@
 				BBBBBC6A194625F2007B4748 /* WACity.m */,
 				BBBBBC6C194629EF007B4748 /* WAWeather.h */,
 				BBBBBC6D194629EF007B4748 /* WAWeather.m */,
+				BB6D1C11194BADE400318106 /* iconMap.plist */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 			files = (
 				BBBBBC3B19443977007B4748 /* InfoPlist.strings in Resources */,
 				BBBBBC4319443977007B4748 /* Images.xcassets in Resources */,
+				BB6D1C12194BADE400318106 /* iconMap.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

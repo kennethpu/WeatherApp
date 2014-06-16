@@ -12,20 +12,9 @@
 @implementation WACity
 
 /// Initializes a City instance with the required properties
-- (id)initWithName:(NSString*)name
-             state:(NSString*)state
-{
-    self = [super init];
-    if (self) {
-        _name = name;
-        _state = state;
-        NSString* query = [NSString stringWithFormat:@"%@ %@", _name, _state];
-        _imgUrl = [[WALibraryAPI sharedInstance] getImageUrl:query];
-    }
-    return self;
-}
-
-/// Initializes a City instance with the required properties
+/// @param name english name of city
+/// @param state english name of state/country containing city
+/// @param imgUrl url of image to display for city
 - (id)initWithName:(NSString*)name
              state:(NSString*)state
             imgUrl:(NSString*)imgUrl
@@ -40,7 +29,7 @@
 }
 
 /// Archives an instance of a City
-- (void)encodeWithCoder:(NSCoder *)aCoder
+- (void)encodeWithCoder:(NSCoder*)aCoder
 {
     [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.state forKey:@"state"];
@@ -48,7 +37,7 @@
 }
 
 /// Unarchives an instance of a City
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithCoder:(NSCoder*)aDecoder
 {
     self = [super init];
     if (self) {
@@ -58,5 +47,6 @@
     }
     return self;
 }
+
 
 @end

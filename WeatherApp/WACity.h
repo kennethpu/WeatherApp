@@ -11,14 +11,19 @@
 
 @interface WACity : NSObject <NSCoding>
 
-/// City Properties
-@property (nonatomic, copy) NSString *name, *state, *imgUrl;
+/// English name of city
+@property (nonatomic, copy, readonly) NSString *name;
+
+/// English name of state/country containing city
+@property (nonatomic, copy, readonly) NSString *state;
+
+/// Url of image to display in background of CityView
+@property (nonatomic, copy, readonly) NSString *imgUrl;
 
 /// Initializes a City instance with the required properties
-- (id)initWithName:(NSString*)name
-             state:(NSString*)state;
-
-/// Initializes a City instance with the required properties
+/// @param name english name of city
+/// @param state english name of state/country containing city
+/// @param imgUrl url of image to display for city
 - (id)initWithName:(NSString*)name
              state:(NSString*)state
             imgUrl:(NSString*)imgUrl;

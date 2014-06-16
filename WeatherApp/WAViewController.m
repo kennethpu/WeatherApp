@@ -32,6 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     currentCityIndex = 0;
     
     // Create a toolbar for add/delete operations and initializes an undo stack
@@ -45,7 +46,7 @@
     allCities = [[WALibraryAPI sharedInstance] getCities];
     
     [self loadPreviousState];
-    scroller = [[WAHorizontalScroller alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TOOLBAR_HEIGHT)];
+    scroller = [[WAHorizontalScroller alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - TOOLBAR_HEIGHT - 20)];
     scroller.backgroundColor = [UIColor blackColor];
     scroller.delegate = self;
     [self.view addSubview:scroller];
@@ -115,8 +116,11 @@
     NSArray *cityInfo = [[[alertView textFieldAtIndex:0] text] componentsSeparatedByString:@","];
     NSString *cityName = cityInfo[0];
     NSString *state = cityInfo[1];
+
     
-    WACity *newCity = [[WACity alloc] initWithName:cityName state:state];
+    NSString* query = [NSString stringWithFormat:@"%@ %@", cityName, state];
+    NSString* imgUrl = [[WALibraryAPI sharedInstance] getImageUrl:query];
+    WACity *newCity = [[WACity alloc] initWithName:cityName state:state imgUrl:imgUrl];
 
     [[WALibraryAPI sharedInstance] addCity:newCity atIndex:currentCityIndex];
     [self reloadScroller];
@@ -153,7 +157,7 @@
 - (UIView*)horizontalScroller:(WAHorizontalScroller *)scroller viewAtIndex:(int)index
 {
     WACity *city = allCities[index];
-    WACityView *cityView = [[WACityView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-VIEWS_OFFSET*2, self.view.frame.size.height-TOOLBAR_HEIGHT) name:city.name state:city.state bgUrl:city.imgUrl];
+    WACityView *cityView = [[WACityView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-VIEWS_OFFSET*2, self.view.frame.size.height-TOOLBAR_HEIGHT-20) name:city.name state:city.state bgUrl:city.imgUrl];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Update weather information for city view
