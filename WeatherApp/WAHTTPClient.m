@@ -8,7 +8,7 @@
 
 #import "WAHTTPClient.h"
 
-const NSString *WUKey = @"4ef3ba9d0ac7d8b9";
+const NSString *WUKey = @"76ee8b22f13c9305";
 
 @implementation WAHTTPClient
 
