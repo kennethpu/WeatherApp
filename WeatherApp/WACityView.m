@@ -9,6 +9,14 @@
 #import "WACityView.h"
 #import "WAWeather.h"
 
+// Constants to make it easier to modify layout
+#define BLUR_ALPHA 0.3  // Alpha value of blur layer
+#define INSET 20        // Inset variable so that all labels are evenly centered and spaced
+#define CITY_HEIGHT 20
+#define TIME_HEIGHT 18
+#define TEMP_HEIGHT 90
+#define ICON_HEIGHT 30
+
 @interface WACityView ()
 
 @property (nonatomic, strong) UIImageView *bgImage;                 // Represents background city image
@@ -47,7 +55,7 @@
         _blurLayer = [[UIToolbar alloc] initWithFrame:frame];
         _blurLayer.autoresizingMask = self.autoresizingMask;
         _blurLayer.backgroundColor = [UIColor blackColor];
-        _blurLayer.alpha = 0.3;
+        _blurLayer.alpha = BLUR_ALPHA;
         [self addSubview:_blurLayer];
         
         // Add table view to handle all data presentation
@@ -62,21 +70,12 @@
         // Set header of table view to be the same size as frame
         CGRect headerFrame = self.bounds;
         
-        // Create an inset variable so that all labels are evenly centered and spaced
-        CGFloat inset = 20;
-        
-        // Create and initialize height variables for various views
-        CGFloat cityHeight = 20;
-        CGFloat timeHeight = 18;
-        CGFloat temperatureHeight = 90;
-        CGFloat iconHeight = 30;
-        
         // Create frames for labels and icon views
-        CGRect cityFrame = CGRectMake(0, inset, self.bounds.size.width, cityHeight);
-        CGRect timeFrame = CGRectMake(0, inset + cityFrame.size.height, self.bounds.size.width, timeHeight);
-        CGRect temperatureFrame = CGRectMake(inset, headerFrame.size.height - (temperatureHeight + inset), headerFrame.size.width, temperatureHeight);
-        CGRect iconFrame = CGRectMake(inset, temperatureFrame.origin.y - iconHeight, iconHeight, iconHeight);
-        CGRect conditionsFrame = CGRectMake(iconFrame.origin.x + (iconHeight + 10), temperatureFrame.origin.y - iconHeight, self.bounds.size.width - (2*inset + iconHeight + 10), iconHeight);
+        CGRect cityFrame = CGRectMake(0, INSET, self.bounds.size.width, CITY_HEIGHT);
+        CGRect timeFrame = CGRectMake(0, INSET + cityFrame.size.height, self.bounds.size.width, TIME_HEIGHT);
+        CGRect temperatureFrame = CGRectMake(INSET, headerFrame.size.height - (TEMP_HEIGHT + INSET), headerFrame.size.width, TEMP_HEIGHT);
+        CGRect iconFrame = CGRectMake(INSET, temperatureFrame.origin.y - ICON_HEIGHT, ICON_HEIGHT, ICON_HEIGHT);
+        CGRect conditionsFrame = CGRectMake(iconFrame.origin.x + (ICON_HEIGHT + INSET/2), temperatureFrame.origin.y - ICON_HEIGHT, self.bounds.size.width - (2*INSET + ICON_HEIGHT + INSET/2), ICON_HEIGHT);
         
         // Set current-conditions view as table header
         UIView *header = [[UIView alloc] initWithFrame:headerFrame];
