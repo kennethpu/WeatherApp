@@ -29,13 +29,7 @@
                                               imgUrl:@"http://upload.wikimedia.org/wikipedia/en/7/75/DowntownSF.jpg"],
                         [[WACity alloc] initWithName:@"Taipei"
                                                state:@"Taiwan"
-                                              imgUrl:@"http://www.celestica.com/uploadedImages/Worldwide_Locations/English/taiwan_Taipei-101.jpg"],
-                        [[WACity alloc] initWithName:@"New York City"
-                                               state:@"New York"
-                                              imgUrl:@"http://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg"],
-                        [[WACity alloc] initWithName:@"London"
-                                               state:@"United Kingdom"
-                                              imgUrl:@"http://paradiseintheworld.com/wp-content/uploads/2012/02/london-united-kingdom.jpg"]]];
+                                              imgUrl:@"http://www.celestica.com/uploadedImages/Worldwide_Locations/English/taiwan_Taipei-101.jpg"]]];
         }
     }
     return self;
