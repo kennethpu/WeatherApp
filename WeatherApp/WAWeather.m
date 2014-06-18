@@ -73,4 +73,30 @@
     return [WAWeather iconMap][iconURL];
 }
 
+/// Archives an instance of a Weather object
+- (void)encodeWithCoder:(NSCoder*)aCoder
+{
+    [aCoder encodeObject:self.condition forKey:@"condition"];
+    [aCoder encodeObject:self.icon forKey:@"icon"];
+    [aCoder encodeObject:self.temperature forKey:@"temperature"];
+    [aCoder encodeObject:self.hiTemp forKey:@"hitemp"];
+    [aCoder encodeObject:self.loTemp forKey:@"lotemp"];
+    [aCoder encodeObject:self.time forKey:@"time"];
+}
+
+/// Unarchives an instance of a Weather object
+- (id)initWithCoder:(NSCoder*)aDecoder
+{
+    self = [super init];
+    if (self) {
+        _condition = [aDecoder decodeObjectForKey:@"condition"];
+        _icon = [aDecoder decodeObjectForKey:@"icon"];
+        _temperature = [aDecoder decodeObjectForKey:@"temperature"];
+        _hiTemp = [aDecoder decodeObjectForKey:@"hitemp"];
+        _loTemp = [aDecoder decodeObjectForKey:@"lotemp"];
+        _time = [aDecoder decodeObjectForKey:@"time"];
+    }
+    return self;
+}
+
 @end

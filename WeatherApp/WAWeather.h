@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface WAWeather : NSObject
+@interface WAWeather : NSObject <NSCoding>
 
 /// Short string describing current weather conditions
 @property (nonatomic, copy, readonly) NSString *condition;

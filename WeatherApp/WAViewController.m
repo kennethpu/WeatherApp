@@ -108,7 +108,7 @@
     titleAlert.alertViewStyle = UIAlertViewStylePlainTextInput;
     UITextField *alertTextField = [titleAlert textFieldAtIndex:0];
     alertTextField.keyboardType = UIKeyboardTypeAlphabet;
-    alertTextField.placeholder = @"City, State/Country";
+    alertTextField.placeholder = @"City,State/Country";
     [titleAlert show];
 }
 
@@ -159,18 +159,37 @@
     WACity *city = allCities[index];
     WACityView *cityView = [[WACityView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-VIEWS_OFFSET*2, self.view.frame.size.height-TOOLBAR_HEIGHT-20) name:city.name state:city.state bgUrl:city.imgUrl];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        // Update weather information for city view
-        dispatch_async(dispatch_get_main_queue(), ^{
+    // Update weather information for city view
+    WAWeather *currentWeather = city.currentConditions;
+    NSArray *hourlyForecast = city.hourlyForecast;
+    NSArray *dailyForecast = city.dailyForecast;
+    
+    if (currentWeather == nil) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            // Update weather information for city view
             WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:cityView.city state:cityView.state];
-            cityView.timeLabel.text = currentWeather.time;
-            cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
-            cityView.conditionsLabel.text = currentWeather.condition;
-            cityView.temperatureLabel.text = [NSString stringWithFormat:@"%@°", currentWeather.temperature];
-            cityView.hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:cityView.city state:cityView.state];
-            cityView.dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:cityView.city state:cityView.state];
+            NSArray *hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:cityView.city state:cityView.state];
+            NSArray *dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:cityView.city state:cityView.state];
+            city.currentConditions = currentWeather;
+            city.hourlyForecast = hourlyForecast;
+            city.dailyForecast = dailyForecast;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                cityView.timeLabel.text = currentWeather.time;
+                cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
+                cityView.conditionsLabel.text = currentWeather.condition;
+                cityView.temperatureLabel.text = [NSString stringWithFormat:@"%@°", currentWeather.temperature];
+                cityView.hourlyForecast = hourlyForecast;
+                cityView.dailyForecast = dailyForecast;
+            });
         });
-    });
+    } else {
+        cityView.timeLabel.text = currentWeather.time;
+        cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
+        cityView.conditionsLabel.text = currentWeather.condition;
+        cityView.temperatureLabel.text = [NSString stringWithFormat:@"%@°", currentWeather.temperature];
+        cityView.hourlyForecast = hourlyForecast;
+        cityView.dailyForecast = dailyForecast;
+    }
     
     return cityView;
 }
