@@ -23,7 +23,6 @@
 @property (nonatomic, strong) UIToolbar *blurLayer;                 // Blur layer to make text more readable
 @property (nonatomic, strong) UITableView *tableView;               // Table view to display weather data
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;   // Indicates activity while background image is being downloaded
-@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @property (nonatomic, assign) CGFloat screenHeight;
 
@@ -150,7 +149,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"WARefreshWeatherNotification"
                                                         object:self
                                                       userInfo:@{@"cityView":self}];
-    [_refreshControl endRefreshing];
 }
 
 - (void) dealloc

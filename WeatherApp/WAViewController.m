@@ -92,13 +92,27 @@
 {
     // Retreive UIIMageView and image URL from notification
     WACityView *cityView = notification.userInfo[@"cityView"];
-    WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:cityView.city state:cityView.state];
-    cityView.timeLabel.text = currentWeather.time;
-    cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
-    cityView.conditionsLabel.text = currentWeather.condition;
-    cityView.temperatureLabel.text = [NSString stringWithFormat:@"%@°", currentWeather.temperature];
-    cityView.hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:cityView.city state:cityView.state];
-    cityView.dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:cityView.city state:cityView.state];
+    WACity *city = allCities[currentCityIndex];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        // Update weather information for city view
+        WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:cityView.city state:cityView.state];
+        NSArray *hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:cityView.city state:cityView.state];
+        NSArray *dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:cityView.city state:cityView.state];
+        city.currentConditions = currentWeather;
+        city.hourlyForecast = hourlyForecast;
+        city.dailyForecast = dailyForecast;
+        [self saveCurrentState];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            cityView.timeLabel.text = currentWeather.time;
+            cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];
+            cityView.conditionsLabel.text = currentWeather.condition;
+            cityView.temperatureLabel.text = [NSString stringWithFormat:@"%@°", currentWeather.temperature];
+            cityView.hourlyForecast = hourlyForecast;
+            cityView.dailyForecast = dailyForecast;
+            [cityView.refreshControl endRefreshing];
+        });
+    });
 }
 
 /// Adds a new city with provided parameters to target index
@@ -116,7 +130,6 @@
     NSArray *cityInfo = [[[alertView textFieldAtIndex:0] text] componentsSeparatedByString:@","];
     NSString *cityName = cityInfo[0];
     NSString *state = cityInfo[1];
-
     
     NSString* query = [NSString stringWithFormat:@"%@ %@", cityName, state];
     NSString* imgUrl = [[WALibraryAPI sharedInstance] getImageUrl:query];
@@ -124,7 +137,6 @@
 
     [[WALibraryAPI sharedInstance] addCity:newCity atIndex:currentCityIndex];
     [self reloadScroller];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveCurrentState) name:UIApplicationDidEnterBackgroundNotification object:nil];
 }
 
 /// Save the index of the last album that user was on
@@ -141,7 +153,7 @@
 }
 
 #pragma mark - HorizontalScrollerDelegate methods
-/// Sets variable that stores current album and displays data for new album
+/// Sets variable that stores current album and displays data for new albumfrel
 - (void)horizontalScroller:(WAHorizontalScroller *)scroller clickedViewAtIndex:(int)index
 {
     currentCityIndex = index;
@@ -173,6 +185,7 @@
             city.currentConditions = currentWeather;
             city.hourlyForecast = hourlyForecast;
             city.dailyForecast = dailyForecast;
+            [self saveCurrentState];
             dispatch_sync(dispatch_get_main_queue(), ^{
                 cityView.timeLabel.text = currentWeather.time;
                 cityView.iconView.image = [UIImage imageNamed:currentWeather.icon];

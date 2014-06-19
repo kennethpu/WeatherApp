@@ -21,6 +21,8 @@
 
 @property NSString *city, *state;
 
+@property UIRefreshControl *refreshControl;
+
 /// Initializes a new CityView instance with the given properties
 - (id)initWithFrame:(CGRect)frame
                name:(NSString*)name
