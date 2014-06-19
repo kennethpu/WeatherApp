@@ -10,6 +10,12 @@
 
 @interface WACityView : UIView <UITableViewDataSource, UITableViewDelegate>
 
+/// English name of city
+@property NSString *city;
+
+/// English name of state/country containing city
+@property NSString *state;
+
 /// UILabels to display weather data
 @property UILabel *temperatureLabel, *conditionsLabel, *timeLabel;
 
@@ -19,7 +25,6 @@
 /// Arrays to hold hourly and daily forecast data
 @property NSArray *hourlyForecast, *dailyForecast;
 
-@property NSString *city, *state;
 
 @property UIRefreshControl *refreshControl;
 

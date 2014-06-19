@@ -12,13 +12,13 @@
 @interface WACity : NSObject <NSCoding>
 
 /// English name of city
-@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *name;
 
 /// English name of state/country containing city
-@property (nonatomic, copy, readonly) NSString *state;
+@property (nonatomic, readonly) NSString *state;
 
 /// Url of image to display in background of CityView
-@property (nonatomic, copy, readonly) NSString *imgUrl;
+@property (nonatomic, readonly) NSString *imgUrl;
 
 /// Weather object describing current weather conditions
 @property (atomic, strong) WAWeather *currentConditions;

@@ -17,6 +17,7 @@
 #define VIEW_PADDING 3
 #define VIEWS_OFFSET 30
 #define TOOLBAR_HEIGHT 33
+#define INSET 20
 
 @interface WAViewController () <HorizontalScrollerDelegate> {
     NSArray *allCities;
@@ -46,7 +47,7 @@
     allCities = [[WALibraryAPI sharedInstance] getCities];
     
     [self loadPreviousState];
-    scroller = [[WAHorizontalScroller alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, self.view.frame.size.height - TOOLBAR_HEIGHT - 20)];
+    scroller = [[WAHorizontalScroller alloc] initWithFrame:CGRectMake(0, INSET, self.view.frame.size.width, self.view.frame.size.height - TOOLBAR_HEIGHT - INSET)];
     scroller.backgroundColor = [UIColor blackColor];
     scroller.delegate = self;
     [self.view addSubview:scroller];
