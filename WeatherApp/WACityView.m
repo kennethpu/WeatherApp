@@ -227,7 +227,7 @@
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
     cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
     cell.textLabel.text = weather.time;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@° / %.@°", weather.hiTemp, weather.loTemp];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@° / %@°", weather.hiTemp, weather.loTemp];
     cell.imageView.image = [UIImage imageNamed:weather.icon];
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 }

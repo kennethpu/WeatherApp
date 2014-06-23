@@ -11,22 +11,22 @@
 @interface WAWeather : NSObject <NSCoding>
 
 /// Short string describing current weather conditions
-@property (nonatomic, copy, readonly) NSString *condition;
+@property (nonatomic, readonly, strong) NSString *condition;
 
 /// Current temperature in fahrenheit
-@property (nonatomic, copy, readonly) NSString *temperature;
+@property (nonatomic, readonly, strong) NSString *temperature;
 
 /// Predicted daily high temperature in fahrenheit
-@property (nonatomic, copy, readonly) NSString *hiTemp;
+@property (nonatomic, readonly, strong) NSString *hiTemp;
 
 /// Predicted daily low temperature in fahrenheit
-@property (nonatomic, copy, readonly) NSString *loTemp;
+@property (nonatomic, readonly, strong) NSString *loTemp;
 
 /// Icon image name to display current weather conditions
-@property (nonatomic, copy, readonly) NSString *icon;
+@property (nonatomic, readonly, strong) NSString *icon;
 
 /// Time corresponding to current weather
-@property (nonatomic, copy, readonly) NSString *time;
+@property (nonatomic, readonly, strong) NSString *time;
 
 /// Initializes a current Weather instance with the required properties
 - (id)initWithCondition:(NSString*)condition
