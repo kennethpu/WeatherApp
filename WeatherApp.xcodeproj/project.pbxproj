@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		BB174F301947A6CF00ED6854 /* WAHorizontalScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */; };
 		BB6D1C12194BADE400318106 /* iconMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6D1C11194BADE400318106 /* iconMap.plist */; };
+		BB8A86F11958B3E300E94AD5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8A86F01958B3E300E94AD5 /* CoreData.framework */; };
+		BB8A873D1958E52400E94AD5 /* WACoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */; };
+		BB8A8761195A296100E94AD5 /* WAModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */; };
+		BB8A877C195A383300E94AD5 /* WACoreDataCity.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A877B195A383300E94AD5 /* WACoreDataCity.m */; };
+		BB8A877F195A383400E94AD5 /* WACoreDataWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A877E195A383400E94AD5 /* WACoreDataWeather.m */; };
 		BBBBBC3119443977007B4748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3019443977007B4748 /* Foundation.framework */; };
 		BBBBBC3319443977007B4748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3219443977007B4748 /* CoreGraphics.framework */; };
 		BBBBBC3519443977007B4748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3419443977007B4748 /* UIKit.framework */; };
@@ -44,6 +49,14 @@
 		BB174F2E1947A6CE00ED6854 /* WAHorizontalScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHorizontalScroller.h; sourceTree = "<group>"; };
 		BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHorizontalScroller.m; sourceTree = "<group>"; };
 		BB6D1C11194BADE400318106 /* iconMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = iconMap.plist; sourceTree = "<group>"; };
+		BB8A86F01958B3E300E94AD5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BB8A873B1958E52400E94AD5 /* WACoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataManager.h; sourceTree = "<group>"; };
+		BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataManager.m; sourceTree = "<group>"; };
+		BB8A8760195A296100E94AD5 /* WAModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WAModel.xcdatamodel; sourceTree = "<group>"; };
+		BB8A877A195A383300E94AD5 /* WACoreDataCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataCity.h; sourceTree = "<group>"; };
+		BB8A877B195A383300E94AD5 /* WACoreDataCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataCity.m; sourceTree = "<group>"; };
+		BB8A877D195A383400E94AD5 /* WACoreDataWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataWeather.h; sourceTree = "<group>"; };
+		BB8A877E195A383400E94AD5 /* WACoreDataWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataWeather.m; sourceTree = "<group>"; };
 		BBBBBC2D19443977007B4748 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBBBBC3019443977007B4748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BBBBBC3219443977007B4748 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB8A86F11958B3E300E94AD5 /* CoreData.framework in Frameworks */,
 				BBBBBC3319443977007B4748 /* CoreGraphics.framework in Frameworks */,
 				BBBBBC3519443977007B4748 /* UIKit.framework in Frameworks */,
 				BBBBBC3119443977007B4748 /* Foundation.framework in Frameworks */,
@@ -122,6 +136,7 @@
 		BBBBBC2F19443977007B4748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB8A86F01958B3E300E94AD5 /* CoreData.framework */,
 				BBBBBC3019443977007B4748 /* Foundation.framework */,
 				BBBBBC3219443977007B4748 /* CoreGraphics.framework */,
 				BBBBBC3419443977007B4748 /* UIKit.framework */,
@@ -181,6 +196,11 @@
 				BBBBBC6A194625F2007B4748 /* WACity.m */,
 				BBBBBC6C194629EF007B4748 /* WAWeather.h */,
 				BBBBBC6D194629EF007B4748 /* WAWeather.m */,
+				BB8A877A195A383300E94AD5 /* WACoreDataCity.h */,
+				BB8A877B195A383300E94AD5 /* WACoreDataCity.m */,
+				BB8A877D195A383400E94AD5 /* WACoreDataWeather.h */,
+				BB8A877E195A383400E94AD5 /* WACoreDataWeather.m */,
+				BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */,
 				BB6D1C11194BADE400318106 /* iconMap.plist */,
 			);
 			name = Model;
@@ -215,6 +235,8 @@
 				BBBBBC7A194698DD007B4748 /* WAPersistencyManager.m */,
 				BBBBBC70194664AF007B4748 /* WAHTTPClient.h */,
 				BBBBBC71194664AF007B4748 /* WAHTTPClient.m */,
+				BB8A873B1958E52400E94AD5 /* WACoreDataManager.h */,
+				BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -317,15 +339,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBBBBC6B194625F2007B4748 /* WACity.m in Sources */,
+				BB8A877F195A383400E94AD5 /* WACoreDataWeather.m in Sources */,
 				BB174F301947A6CF00ED6854 /* WAHorizontalScroller.m in Sources */,
 				BBBBBC64194439F0007B4748 /* WAViewController.m in Sources */,
 				BBBBBC72194664AF007B4748 /* WAHTTPClient.m in Sources */,
 				BBBBBC7819467B47007B4748 /* WACityView.m in Sources */,
 				BBBBBC7519466D51007B4748 /* WALibraryAPI.m in Sources */,
 				BBBBBC6E194629EF007B4748 /* WAWeather.m in Sources */,
+				BB8A8761195A296100E94AD5 /* WAModel.xcdatamodeld in Sources */,
+				BB8A873D1958E52400E94AD5 /* WACoreDataManager.m in Sources */,
 				BBBBBC4119443977007B4748 /* WAAppDelegate.m in Sources */,
 				BBBBBC3D19443977007B4748 /* main.m in Sources */,
 				BBBBBC7B194698DD007B4748 /* WAPersistencyManager.m in Sources */,
+				BB8A877C195A383300E94AD5 /* WACoreDataCity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +562,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BB8A8760195A296100E94AD5 /* WAModel.xcdatamodel */,
+			);
+			currentVersion = BB8A8760195A296100E94AD5 /* WAModel.xcdatamodel */;
+			name = WAModel.xcdatamodeld;
+			path = ../WAModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BBBBBC2519443977007B4748 /* Project object */;
 }
