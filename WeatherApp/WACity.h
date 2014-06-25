@@ -13,19 +13,14 @@
 
 /// English name of city
 @property (nonatomic, readonly, strong) NSString *name;
-
 /// English name of state/country containing city
 @property (nonatomic, readonly, strong) NSString *state;
-
 /// Url of image to display in background of CityView
 @property (nonatomic, readonly, strong) NSString *imgUrl;
-
 /// Weather object describing current weather conditions
 @property (atomic, strong) WAWeather *currentConditions;
-
 /// NSArray of Weather objects denoting hourly forecast
 @property (atomic, strong) NSArray *hourlyForecast;
-
 /// NSArray of Weather objects denoting daily forecast
 @property (atomic, strong) NSArray *dailyForecast;
 

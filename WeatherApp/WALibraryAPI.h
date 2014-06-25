@@ -30,6 +30,10 @@
 /// Get the url of the first image resulting from a google image search of the provided query
 - (NSString*)getImageUrl:(NSString*)query;
 
+/// Downloads the specified images from the given urls
+- (void)downloadImageURL:(NSString*)bgUrl
+               imageView:(UIImageView*)imageView;
+
 /// Fetches current weather conditions for the provided location
 - (WAWeather*)getCurrentWeatherForCity:(NSString*)city
                                  state:(NSString*)state;

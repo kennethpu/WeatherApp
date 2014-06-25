@@ -12,19 +12,14 @@
 
 /// Short string describing current weather conditions
 @property (nonatomic, readonly, strong) NSString *condition;
-
 /// Current temperature in fahrenheit
 @property (nonatomic, readonly, strong) NSString *temperature;
-
 /// Predicted daily high temperature in fahrenheit
 @property (nonatomic, readonly, strong) NSString *hiTemp;
-
 /// Predicted daily low temperature in fahrenheit
 @property (nonatomic, readonly, strong) NSString *loTemp;
-
 /// Icon image name to display current weather conditions
 @property (nonatomic, readonly, strong) NSString *icon;
-
 /// Time corresponding to current weather
 @property (nonatomic, readonly, strong) NSString *time;
 

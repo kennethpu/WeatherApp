@@ -19,12 +19,28 @@
 
 @interface WACityView ()
 
-@property (nonatomic, strong) UIImageView *bgImage;                 // Represents background city image
-@property (nonatomic, strong) UIToolbar *blurLayer;                 // Blur layer to make text more readable
-@property (nonatomic, strong) UITableView *tableView;               // Table view to display weather data
-@property (nonatomic, strong) UIActivityIndicatorView *indicator;   // Indicates activity while background image is being downloaded
-
+/// Height of screen
 @property (nonatomic, assign) CGFloat screenHeight;
+
+/// Represents background city image
+@property (nonatomic, strong) UIImageView *bgImage;
+/// Blur layer to make text more readable
+@property (nonatomic, strong) UIToolbar *blurLayer;
+/// Table view to display weather data
+@property (nonatomic, strong) UITableView *tableView;
+
+/// UILabel to display temperature
+@property UILabel *temperatureLabel;
+/// UILabel to display weather conditions
+@property UILabel *conditionsLabel;
+/// UILabel to display time observation was taken
+@property UILabel *timeLabel;
+/// UIImageView to display weather conditions icon
+@property UIImageView *iconView;
+/// Array to hold hourly forecast data
+@property NSArray *hourlyForecast;
+/// Array to hold daily forecast data
+@property NSArray *dailyForecast;
 
 @end
 
@@ -41,30 +57,28 @@
         self.backgroundColor = [UIColor blackColor];
 
         self.screenHeight = frame.size.height;
-        _city = name;
-        _state = state;
         
         // Add background image
-        _bgImage = [[UIImageView alloc] initWithFrame:frame];
-        _bgImage.contentMode = UIViewContentModeScaleAspectFill;
-        _bgImage.clipsToBounds = YES;
-        [self addSubview:_bgImage];
+        self.bgImage = [[UIImageView alloc] initWithFrame:frame];
+        self.bgImage.contentMode = UIViewContentModeScaleAspectFill;
+        self.bgImage.clipsToBounds = YES;
+        [self addSubview:self.bgImage];
         
         // Add blur layer
-        _blurLayer = [[UIToolbar alloc] initWithFrame:frame];
-        _blurLayer.autoresizingMask = self.autoresizingMask;
-        _blurLayer.backgroundColor = [UIColor blackColor];
-        _blurLayer.alpha = BLUR_ALPHA;
-        [self addSubview:_blurLayer];
+        self.blurLayer = [[UIToolbar alloc] initWithFrame:frame];
+        self.blurLayer.autoresizingMask = self.autoresizingMask;
+        self.blurLayer.backgroundColor = [UIColor blackColor];
+        self.blurLayer.alpha = BLUR_ALPHA;
+        [self addSubview:self.blurLayer];
         
         // Add table view to handle all data presentation
-        _tableView = [[UITableView alloc] initWithFrame:frame];
-        _tableView.backgroundColor = [UIColor clearColor];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
-        _tableView.pagingEnabled = YES;
-        [self addSubview:_tableView];
+        self.tableView = [[UITableView alloc] initWithFrame:frame];
+        self.tableView.backgroundColor = [UIColor clearColor];
+        self.tableView.delegate = self;
+        self.tableView.dataSource = self;
+        self.tableView.separatorColor = [UIColor colorWithWhite:1 alpha:0.2];
+        self.tableView.pagingEnabled = YES;
+        [self addSubview:self.tableView];
         
         // Set header of table view to be the same size as frame
         CGRect headerFrame = self.bounds;
@@ -79,7 +93,7 @@
         // Set current-conditions view as table header
         UIView *header = [[UIView alloc] initWithFrame:headerFrame];
         header.backgroundColor = [UIColor clearColor];
-        _tableView.tableHeaderView = header;
+        self.tableView.tableHeaderView = header;
         
         // Build each required label to display weather data
         UILabel *cityLabel = [[UILabel alloc] initWithFrame:cityFrame];
@@ -90,58 +104,43 @@
         cityLabel.textAlignment = NSTextAlignmentCenter;
         [header addSubview:cityLabel];
         
-        _timeLabel = [[UILabel alloc] initWithFrame:timeFrame];
-        _timeLabel.backgroundColor = [UIColor clearColor];
-        _timeLabel.textColor = [UIColor whiteColor];
-        _timeLabel.text = @"Loading...";
-        _timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
-        _timeLabel.textAlignment = NSTextAlignmentCenter;
-        [header addSubview:_timeLabel];
+        self.timeLabel = [[UILabel alloc] initWithFrame:timeFrame];
+        self.timeLabel.backgroundColor = [UIColor clearColor];
+        self.timeLabel.textColor = [UIColor whiteColor];
+        self.timeLabel.text = @"Loading...";
+        self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:13];
+        self.timeLabel.textAlignment = NSTextAlignmentCenter;
+        [header addSubview:self.timeLabel];
         
-        _temperatureLabel = [[UILabel alloc] initWithFrame:temperatureFrame];
-        _temperatureLabel.backgroundColor = [UIColor clearColor];
-        _temperatureLabel.textColor = [UIColor whiteColor];
-        _temperatureLabel.text = @"0°";
-        _temperatureLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:110];
-        [header addSubview:_temperatureLabel];
+        self.temperatureLabel = [[UILabel alloc] initWithFrame:temperatureFrame];
+        self.temperatureLabel.backgroundColor = [UIColor clearColor];
+        self.temperatureLabel.textColor = [UIColor whiteColor];
+        self.temperatureLabel.text = @"0°";
+        self.temperatureLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:110];
+        [header addSubview:self.temperatureLabel];
         
-        _conditionsLabel = [[UILabel alloc] initWithFrame:conditionsFrame];
-        _conditionsLabel.backgroundColor = [UIColor clearColor];
-        _conditionsLabel.textColor = [UIColor whiteColor];
-        _conditionsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
-        [header addSubview:_conditionsLabel];
+        self.conditionsLabel = [[UILabel alloc] initWithFrame:conditionsFrame];
+        self.conditionsLabel.backgroundColor = [UIColor clearColor];
+        self.conditionsLabel.textColor = [UIColor whiteColor];
+        self.conditionsLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
+        [header addSubview:self.conditionsLabel];
         
         // Add an image view for a weather icon
-        _iconView = [[UIImageView alloc] initWithFrame:iconFrame];
-        _iconView.contentMode = UIViewContentModeScaleAspectFit;
-        _iconView.backgroundColor = [UIColor clearColor];
-        [header addSubview:_iconView];
-
-        // Add activity indicator
-        _indicator = [[UIActivityIndicatorView alloc] init];
-        _indicator.center = self.center;
-        _indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhiteLarge;
-        [_indicator startAnimating];
-        [self addSubview:_indicator];
+        self.iconView = [[UIImageView alloc] initWithFrame:iconFrame];
+        self.iconView.contentMode = UIViewContentModeScaleAspectFit;
+        self.iconView.backgroundColor = [UIColor clearColor];
+        [header addSubview:self.iconView];
         
         // Add refresh control
-        _refreshControl = [[UIRefreshControl alloc] init];
-        [_refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
-        [_tableView addSubview:_refreshControl];
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        [self.refreshControl addTarget:self action:@selector(refreshData) forControlEvents:UIControlEventValueChanged];
+        [self.tableView addSubview:self.refreshControl];
         
-        [_bgImage addObserver:self forKeyPath:@"image" options:0 context:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"WADownloadImageNotification"
                                                             object:self
-                                                          userInfo:@{@"imageView":_bgImage,@"bgUrl":bgUrl}];
+                                                          userInfo:@{@"imageView":self.bgImage,@"bgUrl":bgUrl}];
     }
     return self;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"image"]) {
-        [_indicator stopAnimating];
-    }
 }
 
 - (void)refreshData
@@ -151,9 +150,20 @@
                                                       userInfo:@{@"cityView":self}];
 }
 
-- (void) dealloc
+/// Updates CityView with provided data
+- (void)updateDataWithTime:(NSString *)time
+                   iconImg:(UIImage *)icon
+                conditions:(NSString *)conditions
+               temperature:(NSString *)temperature
+            hourlyForecast:(NSArray *)hourlyForecast
+             dailyForecast:(NSArray *)dailyForecast
 {
-    [_bgImage removeObserver:self forKeyPath:@"image"];
+    self.timeLabel.text = time;
+    self.iconView.image = icon;
+    self.conditionsLabel.text = conditions;
+    self.temperatureLabel.text = temperature;
+    self.hourlyForecast = hourlyForecast;
+    self.dailyForecast = dailyForecast;
 }
 
 #pragma mark - UITableViewDataSource

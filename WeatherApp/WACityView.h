@@ -10,30 +10,6 @@
 
 @interface WACityView : UIView <UITableViewDataSource, UITableViewDelegate>
 
-/// English name of city
-@property NSString *city;
-
-/// English name of state/country containing city
-@property NSString *state;
-
-/// UILabel to display temperature
-@property UILabel *temperatureLabel;
-
-/// UILabel to display weather conditions
-@property UILabel *conditionsLabel;
-
-/// UILabel to display time observation was taken
-@property UILabel *timeLabel;
-
-/// UIImageView to display weather conditions icon
-@property UIImageView *iconView;
-
-/// Arrays to hold hourly forecast data
-@property NSArray *hourlyForecast;
-
-/// Arrays to hold daily forecast data
-@property NSArray *dailyForecast;
-
 /// Refresh control to indicate when data is getting refreshed
 @property UIRefreshControl *refreshControl;
 
@@ -42,5 +18,13 @@
                name:(NSString*)name
               state:(NSString*)state
               bgUrl:(NSString*)bgUrl;
+
+/// Updates CityView with provided data
+- (void)updateDataWithTime:(NSString *)time
+                   iconImg:(UIImage *)icon
+                conditions:(NSString *)conditions
+               temperature:(NSString *)temperature
+            hourlyForecast:(NSArray *)hourlyForecast
+             dailyForecast:(NSArray *)dailyForecast;
 
 @end

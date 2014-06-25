@@ -9,10 +9,12 @@
 #import "WALibraryAPI.h"
 #import "WAHTTPClient.h"
 #import "WAPersistencyManager.h"
+#import "WACoreDataManager.h"
 
 @interface WALibraryAPI () {
     WAPersistencyManager *persistencyManager;
     WAHTTPClient *httpClient;
+    WACoreDataManager *coreDataManager;
 }
 @end
 
@@ -42,7 +44,7 @@
     if (self) {
         persistencyManager = [[WAPersistencyManager alloc] init];
         httpClient = [[WAHTTPClient alloc] init];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(downloadImage:) name:@"WADownloadImageNotification" object:nil];
+        coreDataManager = [WACoreDataManager sharedInstance];
     }
     return self;
 }
@@ -51,6 +53,7 @@
 - (NSArray*)getCities
 {
     return [persistencyManager getCities];
+//    return [coreDataManager getCities];
 }
 
 /// Add a city to the currently saved cities at the provided position
@@ -58,14 +61,22 @@
         atIndex:(int)index
 {
     [persistencyManager addCity:city atIndex:index];
+//    [coreDataManager addCity:city atIndex:index];
 }
 
 /// Delete a city from the currently saved cities at the provided position
 - (void)deleteCityAtIndex:(int)index
 {
     [persistencyManager deleteCityAtIndex:index];
+//    [coreDataManager deleteCityAtIndex:index];
 }
 
+/// Archives current list of cities
+- (void)saveCities
+{
+    [persistencyManager saveCities];
+//    [coreDataManager saveCities];
+}
 
 /// Get the url of the first image resulting from a google image search of the provided query
 - (NSString*)getImageUrl:(NSString*)query
@@ -74,12 +85,9 @@
 }
 
 /// Downloads the specified images from the given urls
-- (void)downloadImage:(NSNotification*)notification
+- (void)downloadImageURL:(NSString*)bgUrl
+               imageView:(UIImageView*)imageView
 {
-    // Retreive UIIMageView and image URL from notification
-    UIImageView *imageView = notification.userInfo[@"imageView"];
-    NSString *bgUrl = notification.userInfo[@"bgUrl"];
-    
     // Retrieve image from PersistencyManager if downloaded previously
     imageView.image = [persistencyManager getImage:[bgUrl lastPathComponent]];
     
@@ -95,12 +103,6 @@
             });
         });
     }
-}
-
-/// Archives current list of cities
-- (void)saveCities
-{
-    [persistencyManager saveCities];
 }
 
 /// Fetches current weather conditions for the provided location
@@ -122,11 +124,6 @@
                                 state:(NSString*)state
 {
     return [httpClient getDailyForecastForCity:city state:state];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
