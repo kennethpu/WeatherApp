@@ -9,12 +9,9 @@
 #import "WALibraryAPI.h"
 #import "WAHTTPClient.h"
 #import "WAPersistencyManager.h"
-#import "WACoreDataManager.h"
-
 @interface WALibraryAPI () {
     WAPersistencyManager *persistencyManager;
     WAHTTPClient *httpClient;
-    WACoreDataManager *coreDataManager;
 }
 @end
 
@@ -44,7 +41,6 @@
     if (self) {
         persistencyManager = [[WAPersistencyManager alloc] init];
         httpClient = [[WAHTTPClient alloc] init];
-        coreDataManager = [WACoreDataManager sharedInstance];
     }
     return self;
 }
