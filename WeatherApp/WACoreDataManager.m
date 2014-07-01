@@ -7,7 +7,9 @@
 //
 
 #import "WACoreDataManager.h"
+#import "WACoreDataApp.h"
 #import "WACoreDataCity.h"
+#import "NSManagedObjectModel+KCOrderedAccessorFix.h"
 
 @implementation WACoreDataManager
 
@@ -38,18 +40,20 @@
     self = [super init];
     if (self) {
         NSManagedObjectContext *context = [self managedObjectContext];
-        NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"City" inManagedObjectContext:context];
+        NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"App" inManagedObjectContext:context];
         NSFetchRequest *request = [[NSFetchRequest alloc] init];
         [request setEntity:entityDesc];
         
         NSError *error;
-        NSArray *cities = [context executeFetchRequest:request error:&error];
-        
-        if ([cities count] == 0) {
+        NSArray *apps = [context executeFetchRequest:request error:&error];
+        if ([apps count] == 0) {
+            WACoreDataApp *app = [NSEntityDescription insertNewObjectForEntityForName:@"App" inManagedObjectContext:context];
             WACoreDataCity *newCity = [NSEntityDescription insertNewObjectForEntityForName:@"City" inManagedObjectContext:context];
             newCity.name = @"San Francisco";
             newCity.state = @"California";
             newCity.imgUrl = @"http://upload.wikimedia.org/wikipedia/en/7/75/DowntownSF.jpg";
+            newCity.app = app;
+            [app addCitiesObject:newCity];
             [context save:&error];
         }
     }
@@ -155,6 +159,7 @@
     }
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"WAModel" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    [_managedObjectModel kc_generateOrderedSetAccessors];
     return _managedObjectModel;
 }
 

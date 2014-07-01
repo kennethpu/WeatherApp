@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="App" representedClassName="WACoreDataApp" syncable="YES">
+        <relationship name="cities" optional="YES" toMany="YES" deletionRule="Deny" ordered="YES" destinationEntity="City" inverseName="app" inverseEntity="City" syncable="YES"/>
+    </entity>
     <entity name="City" representedClassName="WACoreDataCity" syncable="YES">
-        <attribute name="imgUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imgUrl" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="currentWeather" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Weather" syncable="YES"/>
-        <relationship name="dailyForecast" optional="YES" toMany="YES" maxCount="7" deletionRule="Cascade" ordered="YES" destinationEntity="Weather" syncable="YES"/>
-        <relationship name="hourlyForecast" optional="YES" toMany="YES" maxCount="7" deletionRule="Cascade" ordered="YES" destinationEntity="Weather" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="state" attributeType="String" syncable="YES"/>
+        <relationship name="app" maxCount="1" deletionRule="Nullify" destinationEntity="App" inverseName="cities" inverseEntity="App" syncable="YES"/>
+        <relationship name="currentWeather" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CurrentWeather" inverseName="city" inverseEntity="CurrentWeather" syncable="YES"/>
+        <relationship name="dailyForecast" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="DailyWeather" inverseName="city" inverseEntity="DailyWeather" syncable="YES"/>
+        <relationship name="hourlyForecast" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="HourlyWeather" inverseName="city" inverseEntity="HourlyWeather" syncable="YES"/>
     </entity>
-    <entity name="Weather" representedClassName="WACoreDataWeather" syncable="YES">
-        <attribute name="condition" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="hiTemp" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="icon" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="loTemp" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="temperature" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="CurrentWeather" representedClassName="WACoreDataCurrentWeather" syncable="YES">
+        <attribute name="condition" attributeType="String" syncable="YES"/>
+        <attribute name="icon" attributeType="String" syncable="YES"/>
+        <attribute name="temperature" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="time" attributeType="String" syncable="YES"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="currentWeather" inverseEntity="City" syncable="YES"/>
+    </entity>
+    <entity name="DailyWeather" representedClassName="WACoreDataDailyWeather" syncable="YES">
+        <attribute name="hiTemp" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="icon" attributeType="String" syncable="YES"/>
+        <attribute name="loTemp" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="time" attributeType="String" syncable="YES"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="dailyForecast" inverseEntity="City" syncable="YES"/>
+    </entity>
+    <entity name="HourlyWeather" representedClassName="WACoreDataHourlyWeather" syncable="YES">
+        <attribute name="icon" attributeType="String" syncable="YES"/>
+        <attribute name="temperature" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="time" attributeType="String" syncable="YES"/>
+        <relationship name="city" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="City" inverseName="hourlyForecast" inverseEntity="City" syncable="YES"/>
     </entity>
     <elements>
-        <element name="City" positionX="-3807" positionY="-1026" width="128" height="163"/>
-        <element name="Weather" positionX="-3647" positionY="-954" width="128" height="133"/>
+        <element name="App" positionX="-6192" positionY="-2700" width="128" height="58"/>
+        <element name="City" positionX="-6014" positionY="-2637" width="128" height="178"/>
+        <element name="CurrentWeather" positionX="-5850" positionY="-2727" width="128" height="118"/>
+        <element name="HourlyWeather" positionX="-5850" positionY="-2452" width="128" height="103"/>
+        <element name="DailyWeather" positionX="-5850" positionY="-2592" width="128" height="118"/>
     </elements>
 </model>

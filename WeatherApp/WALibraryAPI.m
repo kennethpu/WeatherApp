@@ -44,7 +44,6 @@
     if (self) {
         persistencyManager = [[WAPersistencyManager alloc] init];
         httpClient = [[WAHTTPClient alloc] init];
-        coreDataManager = [WACoreDataManager sharedInstance];
     }
     return self;
 }
@@ -52,30 +51,30 @@
 /// Returns an array of currently saved cities
 - (NSArray*)getCities
 {
-    return [persistencyManager getCities];
-//    return [coreDataManager getCities];
+//    return [persistencyManager getCities];
+    return [[WACoreDataManager sharedInstance] getCities];
 }
 
 /// Add a city to the currently saved cities at the provided position
 - (void)addCity:(WACity *)city
         atIndex:(int)index
 {
-    [persistencyManager addCity:city atIndex:index];
-//    [coreDataManager addCity:city atIndex:index];
+//    [persistencyManager addCity:city atIndex:index];
+    [coreDataManager addCity:city atIndex:index];
 }
 
 /// Delete a city from the currently saved cities at the provided position
 - (void)deleteCityAtIndex:(int)index
 {
-    [persistencyManager deleteCityAtIndex:index];
-//    [coreDataManager deleteCityAtIndex:index];
+//    [persistencyManager deleteCityAtIndex:index];
+    [coreDataManager deleteCityAtIndex:index];
 }
 
 /// Archives current list of cities
 - (void)saveCities
 {
-    [persistencyManager saveCities];
-//    [coreDataManager saveCities];
+//    [persistencyManager saveCities];
+    [coreDataManager saveCities];
 }
 
 /// Get the url of the first image resulting from a google image search of the provided query
