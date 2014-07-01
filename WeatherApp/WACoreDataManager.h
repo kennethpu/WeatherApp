@@ -19,7 +19,7 @@
 + (WACoreDataManager*)sharedInstance;
 
 /// Returns an array of currently saved cities
-- (NSArray*)getCities;
+- (NSOrderedSet*)getCities;
 
 /// Add a city to the currently saved cities at the provided position
 - (void)addCity:(WACity*)city

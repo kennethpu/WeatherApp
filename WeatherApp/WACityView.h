@@ -24,7 +24,7 @@
                    iconImg:(UIImage *)icon
                 conditions:(NSString *)conditions
                temperature:(NSString *)temperature
-            hourlyForecast:(NSArray *)hourlyForecast
-             dailyForecast:(NSArray *)dailyForecast;
+            hourlyForecast:(NSOrderedSet *)hourlyForecast
+             dailyForecast:(NSOrderedSet *)dailyForecast;
 
 @end

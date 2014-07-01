@@ -61,17 +61,17 @@
 }
 
 /// Returns an array of currently saved cities
-- (NSArray*)getCities
+- (NSOrderedSet*)getCities
 {
     NSManagedObjectContext *context = [self managedObjectContext];
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"City" inManagedObjectContext:context];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"App" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDesc];
     
     NSError *error;
-    NSArray *cities = [context executeFetchRequest:request error:&error];
+    WACoreDataApp *app = [context executeFetchRequest:request error:&error][0];
     
-    return cities;
+    return app.cities;
 }
 
 /// Add a city to the currently saved cities at the provided position

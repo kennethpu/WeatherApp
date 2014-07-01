@@ -8,6 +8,8 @@
 
 #import "WACityView.h"
 #import "WAWeather.h"
+#import "WACoreDataHourlyWeather.h"
+#import "WACoreDataDailyWeather.h"
 
 // Constants to make it easier to modify layout
 #define BLUR_ALPHA 0.3  // Alpha value of blur layer
@@ -38,9 +40,9 @@
 /// UIImageView to display weather conditions icon
 @property UIImageView *iconView;
 /// Array to hold hourly forecast data
-@property NSArray *hourlyForecast;
+@property NSOrderedSet *hourlyForecast;
 /// Array to hold daily forecast data
-@property NSArray *dailyForecast;
+@property NSOrderedSet *dailyForecast;
 
 @end
 
@@ -155,8 +157,8 @@
                    iconImg:(UIImage *)icon
                 conditions:(NSString *)conditions
                temperature:(NSString *)temperature
-            hourlyForecast:(NSArray *)hourlyForecast
-             dailyForecast:(NSArray *)dailyForecast
+            hourlyForecast:(NSOrderedSet *)hourlyForecast
+             dailyForecast:(NSOrderedSet *)dailyForecast
 {
     self.timeLabel.text = time;
     self.iconView.image = icon;
@@ -196,7 +198,7 @@
         if (indexPath.row == 0) {
             [self configureHeaderCell:cell title:@"Hourly Forecast"];
         } else {
-            WAWeather *weather = self.hourlyForecast[indexPath.row-1];
+            WACoreDataHourlyWeather *weather = self.hourlyForecast[indexPath.row-1];
             [self configureHourlyCell:cell weather:weather];
         }
     }
@@ -204,7 +206,7 @@
         if (indexPath.row == 0) {
             [self configureHeaderCell:cell title:@"Daily Forecast"];
         } else {
-            WAWeather *weather = self.dailyForecast[indexPath.row-1];
+            WACoreDataDailyWeather *weather = self.dailyForecast[indexPath.row-1];
             [self configureDailyCell:cell weather:weather];
         }
     }
@@ -221,7 +223,7 @@
 }
 
 - (void)configureHourlyCell:(UITableViewCell *)cell
-                   weather:(WAWeather*)weather
+                   weather:(WACoreDataHourlyWeather*)weather
 {
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
     cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
@@ -232,7 +234,7 @@
 }
 
 - (void)configureDailyCell:(UITableViewCell *)cell
-                   weather:(WAWeather*)weather
+                   weather:(WACoreDataDailyWeather*)weather
 {
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:18];
     cell.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:18];
