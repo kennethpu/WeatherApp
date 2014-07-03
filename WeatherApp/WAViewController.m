@@ -12,6 +12,10 @@
 #import "WACity.h"
 #import "WACityView.h"
 #import "WAWeather.h"
+#import "WACoreDataManager.h"
+#import "WACoreDataCurrentWeather.h"
+#import "WACoreDataHourlyWeather.h"
+#import "WACoreDataDailyWeather.h"
 
 // Constants to make it easy to modify layout
 #define VIEW_PADDING 3
@@ -20,7 +24,7 @@
 #define INSET 20
 
 @interface WAViewController () <HorizontalScrollerDelegate> {
-    NSArray *allCities;
+    NSOrderedSet *allCities;
     int currentCityIndex;
     WAHorizontalScroller *scroller;
     UIToolbar *toolbar;
@@ -91,6 +95,7 @@
     // Delete album using LibraryAPI
     [[WALibraryAPI sharedInstance] deleteCityAtIndex:currentCityIndex];
     [self reloadScroller];
+    [self saveCurrentState];
 }
 
 /// Downloads the specified images from the given urls
@@ -98,31 +103,83 @@
 {
     // Retreive UIIMageView and image URL from notification
     WACityView *cityView = notification.userInfo[@"cityView"];
-    WACity *city = allCities[currentCityIndex];
+    WACoreDataCity *city = [[WALibraryAPI sharedInstance] getCityAtIndex:currentCityIndex];
     
+    [self updateCityView:cityView andCity:city];
+}
+
+- (void)updateCityView:(WACityView*)cityView
+               andCity:(WACoreDataCity*)city
+{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         // Get updated weather information
         WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:city.name state:city.state];
         NSArray *hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:city.name state:city.state];
         NSArray *dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:city.name state:city.state];
         
-        // Update weather information for city
-        city.currentConditions = currentWeather;
-        city.hourlyForecast = hourlyForecast;
-        city.dailyForecast = dailyForecast;
-        
-        // Save current state
-        [self saveCurrentState];
-        
+        // Update Core Data Model as well as UI
         dispatch_sync(dispatch_get_main_queue(), ^{
+            // Get managed object context
+            NSManagedObjectContext *context = [[WACoreDataManager sharedInstance] managedObjectContext];
+            
+            // Save current weather data
+            WACoreDataCurrentWeather *coreDataCurrentWeather = city.currentWeather;
+            if (!coreDataCurrentWeather) {
+                coreDataCurrentWeather = [NSEntityDescription insertNewObjectForEntityForName:@"CurrentWeather" inManagedObjectContext:context];
+            }
+            coreDataCurrentWeather.time = currentWeather.time;
+            coreDataCurrentWeather.icon = currentWeather.icon;
+            coreDataCurrentWeather.condition = currentWeather.condition;
+            coreDataCurrentWeather.temperature = [NSNumber numberWithFloat:[currentWeather.temperature floatValue]];
+            coreDataCurrentWeather.city = city;
+            city.currentWeather = coreDataCurrentWeather;
+            
+            // Save hourly forecast data
+            for (int i=0; i<[hourlyForecast count]; i++) {
+                WACoreDataHourlyWeather *coreDataHourlyWeather;
+                if ([city.hourlyForecast count] <= i) {
+                    coreDataHourlyWeather = [NSEntityDescription insertNewObjectForEntityForName:@"HourlyWeather" inManagedObjectContext:context];
+                } else {
+                    coreDataHourlyWeather = [city.hourlyForecast objectAtIndex:i];
+                }
+                WAWeather *hourWeather = [hourlyForecast objectAtIndex:i];
+                coreDataHourlyWeather.time = hourWeather.time;
+                coreDataHourlyWeather.icon = hourWeather.icon;
+                coreDataHourlyWeather.temperature = [NSNumber numberWithFloat:[hourWeather.temperature floatValue]];
+                coreDataHourlyWeather.city = city;
+                [city addHourlyForecastObject:coreDataHourlyWeather];
+            }
+            
+            // Save daily forecast data
+            for (int i=0; i<[dailyForecast count]; i++) {
+                WACoreDataDailyWeather *coreDataDailyWeather;
+                if ([city.dailyForecast count] <= i) {
+                    coreDataDailyWeather = [NSEntityDescription insertNewObjectForEntityForName:@"DailyWeather" inManagedObjectContext:context];
+                } else {
+                    coreDataDailyWeather = [city.dailyForecast objectAtIndex:i];
+                }
+                WAWeather *dayWeather = [dailyForecast objectAtIndex:i];
+                coreDataDailyWeather.time = dayWeather.time;
+                coreDataDailyWeather.icon = dayWeather.icon;
+                coreDataDailyWeather.hiTemp = [NSNumber numberWithFloat:[dayWeather.hiTemp floatValue]];
+                coreDataDailyWeather.loTemp = [NSNumber numberWithFloat:[dayWeather.loTemp floatValue]];
+                coreDataDailyWeather.city = city;
+                [city addDailyForecastObject:coreDataDailyWeather];
+            }
+            
+            // Save context
+            [self saveCurrentState];
+            
             // Update weather information for city view
             [cityView updateDataWithTime:currentWeather.time
                                  iconImg:[UIImage imageNamed:currentWeather.icon]
                               conditions:currentWeather.condition
                              temperature:[NSString stringWithFormat:@"%@°", currentWeather.temperature]
-                          hourlyForecast:hourlyForecast
-                           dailyForecast:dailyForecast];
-            [cityView.refreshControl endRefreshing];
+                          hourlyForecast:city.hourlyForecast
+                           dailyForecast:city.dailyForecast];
+            if (cityView.refreshControl.refreshing) {
+                [cityView.refreshControl endRefreshing];
+            }
         });
     });
 }
@@ -160,6 +217,7 @@
 
     [[WALibraryAPI sharedInstance] addCity:newCity atIndex:currentCityIndex];
     [self reloadScroller];
+    [self saveCurrentState];
 }
 
 /// Save the index of the last album that user was on
@@ -191,40 +249,17 @@
 /// Returns a CityView for the view at the current index
 - (UIView*)horizontalScroller:(WAHorizontalScroller *)scroller viewAtIndex:(int)index
 {
-    WACity *city = allCities[index];
+//    WACity *city = allCities[index];
+    WACoreDataCity *city = [[WALibraryAPI sharedInstance] getCityAtIndex:index];
     WACityView *cityView = [[WACityView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width-VIEWS_OFFSET*2, self.view.frame.size.height-TOOLBAR_HEIGHT-20) name:city.name state:city.state bgUrl:city.imgUrl];
     
-    // Update weather information for city view
-    WAWeather *currentWeather = city.currentConditions;
-    NSArray *hourlyForecast = city.hourlyForecast;
-    NSArray *dailyForecast = city.dailyForecast;
+    // Get
+    WACoreDataCurrentWeather *currentWeather = city.currentWeather;
+    NSOrderedSet *hourlyForecast = city.hourlyForecast;
+    NSOrderedSet *dailyForecast = city.dailyForecast;
     
     if (currentWeather == nil) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            // Get updated weather information
-            WAWeather *currentWeather = [[WALibraryAPI sharedInstance] getCurrentWeatherForCity:city.name state:city.state];
-            NSArray *hourlyForecast = [[WALibraryAPI sharedInstance] getHourlyForecastForCity:city.name state:city.state];
-            NSArray *dailyForecast = [[WALibraryAPI sharedInstance] getDailyForecastForCity:city.name state:city.state];
-            
-            // Update weather information for city
-            city.currentConditions = currentWeather;
-            city.hourlyForecast = hourlyForecast;
-            city.dailyForecast = dailyForecast;
-            
-            // Save current state
-            [self saveCurrentState];
-            
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                // Update weather information for city view
-                [cityView updateDataWithTime:currentWeather.time
-                                     iconImg:[UIImage imageNamed:currentWeather.icon]
-                                  conditions:currentWeather.condition
-                                 temperature:[NSString stringWithFormat:@"%@°", currentWeather.temperature]
-                              hourlyForecast:hourlyForecast
-                               dailyForecast:dailyForecast];
-                
-            });
-        });
+        [self updateCityView:cityView andCity:city];
     } else {
         // Update weather information for city view
         [cityView updateDataWithTime:currentWeather.time
@@ -242,9 +277,9 @@
 - (void)reloadScroller
 {
     allCities = [[WALibraryAPI sharedInstance] getCities];
-    if (currentCityIndex < 0) currentCityIndex = 0;
-    else if (currentCityIndex >= allCities.count) currentCityIndex = allCities.count-1;
-//    currentCityIndex = allCities.count-1;
+//    if (currentCityIndex < 0) currentCityIndex = 0;
+//    else if (currentCityIndex >= allCities.count) currentCityIndex = allCities.count-1;
+    currentCityIndex = allCities.count-1;
     [scroller reload];
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "WACity.h"
+#import "WACoreDataCity.h"
 
 @interface WALibraryAPI : NSObject
 
@@ -15,7 +16,9 @@
 + (WALibraryAPI*)sharedInstance;
 
 /// Returns an array of currently saved cities
-- (NSArray*)getCities;
+- (NSOrderedSet*)getCities;
+
+- (WACoreDataCity*)getCityAtIndex:(int)index;
 
 /// Add a city to the currently saved cities at the provided position
 - (void)addCity:(WACity*)city

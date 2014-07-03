@@ -46,32 +46,39 @@
 }
 
 /// Returns an array of currently saved cities
-- (NSArray*)getCities
+- (NSOrderedSet*)getCities
 {
-    return [persistencyManager getCities];
-//    return [coreDataManager getCities];
+//    return [persistencyManager getCities];
+    return [[WACoreDataManager sharedInstance] getCities];
+}
+
+/// Returns an array of currently saved cities
+- (WACoreDataCity*)getCityAtIndex:(int)index
+{
+    //    return [persistencyManager getCities];
+    return [[WACoreDataManager sharedInstance] getCities][index];
 }
 
 /// Add a city to the currently saved cities at the provided position
 - (void)addCity:(WACity *)city
         atIndex:(int)index
 {
-    [persistencyManager addCity:city atIndex:index];
-//    [coreDataManager addCity:city atIndex:index];
+//    [persistencyManager addCity:city atIndex:index];
+    [[WACoreDataManager sharedInstance] addCity:city atIndex:index];
 }
 
 /// Delete a city from the currently saved cities at the provided position
 - (void)deleteCityAtIndex:(int)index
 {
-    [persistencyManager deleteCityAtIndex:index];
-//    [coreDataManager deleteCityAtIndex:index];
+//    [persistencyManager deleteCityAtIndex:index];
+    [[WACoreDataManager sharedInstance] deleteCityAtIndex:index];
 }
 
 /// Archives current list of cities
 - (void)saveCities
 {
-    [persistencyManager saveCities];
-//    [coreDataManager saveCities];
+//    [persistencyManager saveCities];
+    [[WACoreDataManager sharedInstance] saveCities];
 }
 
 /// Get the url of the first image resulting from a google image search of the provided query

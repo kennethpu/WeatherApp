@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BB092F63196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = BB092F62196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
 		BB174F301947A6CF00ED6854 /* WAHorizontalScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */; };
 		BB6D1C12194BADE400318106 /* iconMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6D1C11194BADE400318106 /* iconMap.plist */; };
+		BB8A86F11958B3E300E94AD5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8A86F01958B3E300E94AD5 /* CoreData.framework */; };
+		BB8A873D1958E52400E94AD5 /* WACoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */; };
+		BB8A8761195A296100E94AD5 /* WAModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */; };
+		BB9035471965CBDC0054A841 /* WACoreDataDailyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9035461965CBDC0054A841 /* WACoreDataDailyWeather.m */; };
+		BB90354A1965CBDD0054A841 /* WACoreDataCurrentWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9035491965CBDD0054A841 /* WACoreDataCurrentWeather.m */; };
+		BB90354D1965CBDD0054A841 /* WACoreDataHourlyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB90354C1965CBDD0054A841 /* WACoreDataHourlyWeather.m */; };
+		BB9035501965CBDD0054A841 /* WACoreDataCity.m in Sources */ = {isa = PBXBuildFile; fileRef = BB90354F1965CBDD0054A841 /* WACoreDataCity.m */; };
+		BB9035531965CBDD0054A841 /* WACoreDataApp.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9035521965CBDD0054A841 /* WACoreDataApp.m */; };
 		BBBBBC3119443977007B4748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3019443977007B4748 /* Foundation.framework */; };
 		BBBBBC3319443977007B4748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3219443977007B4748 /* CoreGraphics.framework */; };
 		BBBBBC3519443977007B4748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3419443977007B4748 /* UIKit.framework */; };
@@ -41,9 +50,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BB092F61196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+KCOrderedAccessorFix.h"; sourceTree = "<group>"; };
+		BB092F62196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+KCOrderedAccessorFix.m"; sourceTree = "<group>"; };
 		BB174F2E1947A6CE00ED6854 /* WAHorizontalScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHorizontalScroller.h; sourceTree = "<group>"; };
 		BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHorizontalScroller.m; sourceTree = "<group>"; };
 		BB6D1C11194BADE400318106 /* iconMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = iconMap.plist; sourceTree = "<group>"; };
+		BB8A86F01958B3E300E94AD5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		BB8A873B1958E52400E94AD5 /* WACoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataManager.h; sourceTree = "<group>"; };
+		BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataManager.m; sourceTree = "<group>"; };
+		BB8A8760195A296100E94AD5 /* WAModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WAModel.xcdatamodel; sourceTree = "<group>"; };
+		BB9035451965CBDC0054A841 /* WACoreDataDailyWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataDailyWeather.h; sourceTree = "<group>"; };
+		BB9035461965CBDC0054A841 /* WACoreDataDailyWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataDailyWeather.m; sourceTree = "<group>"; };
+		BB9035481965CBDD0054A841 /* WACoreDataCurrentWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataCurrentWeather.h; sourceTree = "<group>"; };
+		BB9035491965CBDD0054A841 /* WACoreDataCurrentWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataCurrentWeather.m; sourceTree = "<group>"; };
+		BB90354B1965CBDD0054A841 /* WACoreDataHourlyWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataHourlyWeather.h; sourceTree = "<group>"; };
+		BB90354C1965CBDD0054A841 /* WACoreDataHourlyWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataHourlyWeather.m; sourceTree = "<group>"; };
+		BB90354E1965CBDD0054A841 /* WACoreDataCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataCity.h; sourceTree = "<group>"; };
+		BB90354F1965CBDD0054A841 /* WACoreDataCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataCity.m; sourceTree = "<group>"; };
+		BB9035511965CBDD0054A841 /* WACoreDataApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataApp.h; sourceTree = "<group>"; };
+		BB9035521965CBDD0054A841 /* WACoreDataApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataApp.m; sourceTree = "<group>"; };
 		BBBBBC2D19443977007B4748 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBBBBC3019443977007B4748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BBBBBC3219443977007B4748 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -81,6 +106,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB8A86F11958B3E300E94AD5 /* CoreData.framework in Frameworks */,
 				BBBBBC3319443977007B4748 /* CoreGraphics.framework in Frameworks */,
 				BBBBBC3519443977007B4748 /* UIKit.framework in Frameworks */,
 				BBBBBC3119443977007B4748 /* Foundation.framework in Frameworks */,
@@ -122,6 +148,7 @@
 		BBBBBC2F19443977007B4748 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BB8A86F01958B3E300E94AD5 /* CoreData.framework */,
 				BBBBBC3019443977007B4748 /* Foundation.framework */,
 				BBBBBC3219443977007B4748 /* CoreGraphics.framework */,
 				BBBBBC3419443977007B4748 /* UIKit.framework */,
@@ -139,6 +166,8 @@
 				BBBBBC6F1946645E007B4748 /* API */,
 				BBBBBC3F19443977007B4748 /* WAAppDelegate.h */,
 				BBBBBC4019443977007B4748 /* WAAppDelegate.m */,
+				BB092F61196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.h */,
+				BB092F62196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m */,
 				BBBBBC4219443977007B4748 /* Images.xcassets */,
 				BBBBBC3719443977007B4748 /* Supporting Files */,
 			);
@@ -181,6 +210,17 @@
 				BBBBBC6A194625F2007B4748 /* WACity.m */,
 				BBBBBC6C194629EF007B4748 /* WAWeather.h */,
 				BBBBBC6D194629EF007B4748 /* WAWeather.m */,
+				BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */,
+				BB9035511965CBDD0054A841 /* WACoreDataApp.h */,
+				BB9035521965CBDD0054A841 /* WACoreDataApp.m */,
+				BB90354E1965CBDD0054A841 /* WACoreDataCity.h */,
+				BB90354F1965CBDD0054A841 /* WACoreDataCity.m */,
+				BB9035481965CBDD0054A841 /* WACoreDataCurrentWeather.h */,
+				BB9035491965CBDD0054A841 /* WACoreDataCurrentWeather.m */,
+				BB90354B1965CBDD0054A841 /* WACoreDataHourlyWeather.h */,
+				BB90354C1965CBDD0054A841 /* WACoreDataHourlyWeather.m */,
+				BB9035451965CBDC0054A841 /* WACoreDataDailyWeather.h */,
+				BB9035461965CBDC0054A841 /* WACoreDataDailyWeather.m */,
 				BB6D1C11194BADE400318106 /* iconMap.plist */,
 			);
 			name = Model;
@@ -215,6 +255,8 @@
 				BBBBBC7A194698DD007B4748 /* WAPersistencyManager.m */,
 				BBBBBC70194664AF007B4748 /* WAHTTPClient.h */,
 				BBBBBC71194664AF007B4748 /* WAHTTPClient.m */,
+				BB8A873B1958E52400E94AD5 /* WACoreDataManager.h */,
+				BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -323,6 +365,14 @@
 				BBBBBC7819467B47007B4748 /* WACityView.m in Sources */,
 				BBBBBC7519466D51007B4748 /* WALibraryAPI.m in Sources */,
 				BBBBBC6E194629EF007B4748 /* WAWeather.m in Sources */,
+				BB90354A1965CBDD0054A841 /* WACoreDataCurrentWeather.m in Sources */,
+				BB9035531965CBDD0054A841 /* WACoreDataApp.m in Sources */,
+				BB90354D1965CBDD0054A841 /* WACoreDataHourlyWeather.m in Sources */,
+				BB9035501965CBDD0054A841 /* WACoreDataCity.m in Sources */,
+				BB9035471965CBDC0054A841 /* WACoreDataDailyWeather.m in Sources */,
+				BB092F63196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
+				BB8A8761195A296100E94AD5 /* WAModel.xcdatamodeld in Sources */,
+				BB8A873D1958E52400E94AD5 /* WACoreDataManager.m in Sources */,
 				BBBBBC4119443977007B4748 /* WAAppDelegate.m in Sources */,
 				BBBBBC3D19443977007B4748 /* main.m in Sources */,
 				BBBBBC7B194698DD007B4748 /* WAPersistencyManager.m in Sources */,
@@ -536,6 +586,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BB8A8760195A296100E94AD5 /* WAModel.xcdatamodel */,
+			);
+			currentVersion = BB8A8760195A296100E94AD5 /* WAModel.xcdatamodel */;
+			name = WAModel.xcdatamodeld;
+			path = ../WAModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BBBBBC2519443977007B4748 /* Project object */;
 }
