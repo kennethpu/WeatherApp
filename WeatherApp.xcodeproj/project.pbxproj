@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		BB092F63196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = BB092F62196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
-		BB092F69196368940074DF9A /* WACoreDataCity.m in Sources */ = {isa = PBXBuildFile; fileRef = BB092F68196368940074DF9A /* WACoreDataCity.m */; };
-		BB092F6C196368940074DF9A /* WACoreDataHourlyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB092F6B196368940074DF9A /* WACoreDataHourlyWeather.m */; };
-		BB092F6F196368940074DF9A /* WACoreDataDailyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB092F6E196368940074DF9A /* WACoreDataDailyWeather.m */; };
-		BB092F72196368940074DF9A /* WACoreDataApp.m in Sources */ = {isa = PBXBuildFile; fileRef = BB092F71196368940074DF9A /* WACoreDataApp.m */; };
-		BB092F75196368940074DF9A /* WACoreDataCurrentWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB092F74196368940074DF9A /* WACoreDataCurrentWeather.m */; };
 		BB174F301947A6CF00ED6854 /* WAHorizontalScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */; };
 		BB6D1C12194BADE400318106 /* iconMap.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6D1C11194BADE400318106 /* iconMap.plist */; };
 		BB8A86F11958B3E300E94AD5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB8A86F01958B3E300E94AD5 /* CoreData.framework */; };
 		BB8A873D1958E52400E94AD5 /* WACoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */; };
 		BB8A8761195A296100E94AD5 /* WAModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */; };
+		BB9035471965CBDC0054A841 /* WACoreDataDailyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9035461965CBDC0054A841 /* WACoreDataDailyWeather.m */; };
+		BB90354A1965CBDD0054A841 /* WACoreDataCurrentWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9035491965CBDD0054A841 /* WACoreDataCurrentWeather.m */; };
+		BB90354D1965CBDD0054A841 /* WACoreDataHourlyWeather.m in Sources */ = {isa = PBXBuildFile; fileRef = BB90354C1965CBDD0054A841 /* WACoreDataHourlyWeather.m */; };
+		BB9035501965CBDD0054A841 /* WACoreDataCity.m in Sources */ = {isa = PBXBuildFile; fileRef = BB90354F1965CBDD0054A841 /* WACoreDataCity.m */; };
+		BB9035531965CBDD0054A841 /* WACoreDataApp.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9035521965CBDD0054A841 /* WACoreDataApp.m */; };
 		BBBBBC3119443977007B4748 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3019443977007B4748 /* Foundation.framework */; };
 		BBBBBC3319443977007B4748 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3219443977007B4748 /* CoreGraphics.framework */; };
 		BBBBBC3519443977007B4748 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BBBBBC3419443977007B4748 /* UIKit.framework */; };
@@ -52,16 +52,6 @@
 /* Begin PBXFileReference section */
 		BB092F61196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+KCOrderedAccessorFix.h"; sourceTree = "<group>"; };
 		BB092F62196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+KCOrderedAccessorFix.m"; sourceTree = "<group>"; };
-		BB092F67196368940074DF9A /* WACoreDataCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataCity.h; sourceTree = "<group>"; };
-		BB092F68196368940074DF9A /* WACoreDataCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataCity.m; sourceTree = "<group>"; };
-		BB092F6A196368940074DF9A /* WACoreDataHourlyWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataHourlyWeather.h; sourceTree = "<group>"; };
-		BB092F6B196368940074DF9A /* WACoreDataHourlyWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataHourlyWeather.m; sourceTree = "<group>"; };
-		BB092F6D196368940074DF9A /* WACoreDataDailyWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataDailyWeather.h; sourceTree = "<group>"; };
-		BB092F6E196368940074DF9A /* WACoreDataDailyWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataDailyWeather.m; sourceTree = "<group>"; };
-		BB092F70196368940074DF9A /* WACoreDataApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataApp.h; sourceTree = "<group>"; };
-		BB092F71196368940074DF9A /* WACoreDataApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataApp.m; sourceTree = "<group>"; };
-		BB092F73196368940074DF9A /* WACoreDataCurrentWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataCurrentWeather.h; sourceTree = "<group>"; };
-		BB092F74196368940074DF9A /* WACoreDataCurrentWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataCurrentWeather.m; sourceTree = "<group>"; };
 		BB174F2E1947A6CE00ED6854 /* WAHorizontalScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WAHorizontalScroller.h; sourceTree = "<group>"; };
 		BB174F2F1947A6CF00ED6854 /* WAHorizontalScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WAHorizontalScroller.m; sourceTree = "<group>"; };
 		BB6D1C11194BADE400318106 /* iconMap.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = iconMap.plist; sourceTree = "<group>"; };
@@ -69,6 +59,16 @@
 		BB8A873B1958E52400E94AD5 /* WACoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataManager.h; sourceTree = "<group>"; };
 		BB8A873C1958E52400E94AD5 /* WACoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataManager.m; sourceTree = "<group>"; };
 		BB8A8760195A296100E94AD5 /* WAModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WAModel.xcdatamodel; sourceTree = "<group>"; };
+		BB9035451965CBDC0054A841 /* WACoreDataDailyWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataDailyWeather.h; sourceTree = "<group>"; };
+		BB9035461965CBDC0054A841 /* WACoreDataDailyWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataDailyWeather.m; sourceTree = "<group>"; };
+		BB9035481965CBDD0054A841 /* WACoreDataCurrentWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataCurrentWeather.h; sourceTree = "<group>"; };
+		BB9035491965CBDD0054A841 /* WACoreDataCurrentWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataCurrentWeather.m; sourceTree = "<group>"; };
+		BB90354B1965CBDD0054A841 /* WACoreDataHourlyWeather.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataHourlyWeather.h; sourceTree = "<group>"; };
+		BB90354C1965CBDD0054A841 /* WACoreDataHourlyWeather.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataHourlyWeather.m; sourceTree = "<group>"; };
+		BB90354E1965CBDD0054A841 /* WACoreDataCity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataCity.h; sourceTree = "<group>"; };
+		BB90354F1965CBDD0054A841 /* WACoreDataCity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataCity.m; sourceTree = "<group>"; };
+		BB9035511965CBDD0054A841 /* WACoreDataApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WACoreDataApp.h; sourceTree = "<group>"; };
+		BB9035521965CBDD0054A841 /* WACoreDataApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WACoreDataApp.m; sourceTree = "<group>"; };
 		BBBBBC2D19443977007B4748 /* WeatherApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BBBBBC3019443977007B4748 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BBBBBC3219443977007B4748 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -211,16 +211,16 @@
 				BBBBBC6C194629EF007B4748 /* WAWeather.h */,
 				BBBBBC6D194629EF007B4748 /* WAWeather.m */,
 				BB8A875F195A296100E94AD5 /* WAModel.xcdatamodeld */,
-				BB092F70196368940074DF9A /* WACoreDataApp.h */,
-				BB092F71196368940074DF9A /* WACoreDataApp.m */,
-				BB092F67196368940074DF9A /* WACoreDataCity.h */,
-				BB092F68196368940074DF9A /* WACoreDataCity.m */,
-				BB092F73196368940074DF9A /* WACoreDataCurrentWeather.h */,
-				BB092F74196368940074DF9A /* WACoreDataCurrentWeather.m */,
-				BB092F6A196368940074DF9A /* WACoreDataHourlyWeather.h */,
-				BB092F6B196368940074DF9A /* WACoreDataHourlyWeather.m */,
-				BB092F6D196368940074DF9A /* WACoreDataDailyWeather.h */,
-				BB092F6E196368940074DF9A /* WACoreDataDailyWeather.m */,
+				BB9035511965CBDD0054A841 /* WACoreDataApp.h */,
+				BB9035521965CBDD0054A841 /* WACoreDataApp.m */,
+				BB90354E1965CBDD0054A841 /* WACoreDataCity.h */,
+				BB90354F1965CBDD0054A841 /* WACoreDataCity.m */,
+				BB9035481965CBDD0054A841 /* WACoreDataCurrentWeather.h */,
+				BB9035491965CBDD0054A841 /* WACoreDataCurrentWeather.m */,
+				BB90354B1965CBDD0054A841 /* WACoreDataHourlyWeather.h */,
+				BB90354C1965CBDD0054A841 /* WACoreDataHourlyWeather.m */,
+				BB9035451965CBDC0054A841 /* WACoreDataDailyWeather.h */,
+				BB9035461965CBDC0054A841 /* WACoreDataDailyWeather.m */,
 				BB6D1C11194BADE400318106 /* iconMap.plist */,
 			);
 			name = Model;
@@ -359,23 +359,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBBBBC6B194625F2007B4748 /* WACity.m in Sources */,
-				BB092F72196368940074DF9A /* WACoreDataApp.m in Sources */,
 				BB174F301947A6CF00ED6854 /* WAHorizontalScroller.m in Sources */,
 				BBBBBC64194439F0007B4748 /* WAViewController.m in Sources */,
 				BBBBBC72194664AF007B4748 /* WAHTTPClient.m in Sources */,
 				BBBBBC7819467B47007B4748 /* WACityView.m in Sources */,
-				BB092F75196368940074DF9A /* WACoreDataCurrentWeather.m in Sources */,
 				BBBBBC7519466D51007B4748 /* WALibraryAPI.m in Sources */,
 				BBBBBC6E194629EF007B4748 /* WAWeather.m in Sources */,
+				BB90354A1965CBDD0054A841 /* WACoreDataCurrentWeather.m in Sources */,
+				BB9035531965CBDD0054A841 /* WACoreDataApp.m in Sources */,
+				BB90354D1965CBDD0054A841 /* WACoreDataHourlyWeather.m in Sources */,
+				BB9035501965CBDD0054A841 /* WACoreDataCity.m in Sources */,
+				BB9035471965CBDC0054A841 /* WACoreDataDailyWeather.m in Sources */,
 				BB092F63196363160074DF9A /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */,
 				BB8A8761195A296100E94AD5 /* WAModel.xcdatamodeld in Sources */,
-				BB092F6C196368940074DF9A /* WACoreDataHourlyWeather.m in Sources */,
 				BB8A873D1958E52400E94AD5 /* WACoreDataManager.m in Sources */,
 				BBBBBC4119443977007B4748 /* WAAppDelegate.m in Sources */,
 				BBBBBC3D19443977007B4748 /* main.m in Sources */,
-				BB092F6F196368940074DF9A /* WACoreDataDailyWeather.m in Sources */,
 				BBBBBC7B194698DD007B4748 /* WAPersistencyManager.m in Sources */,
-				BB092F69196368940074DF9A /* WACoreDataCity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

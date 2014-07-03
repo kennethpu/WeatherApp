@@ -2,7 +2,7 @@
 //  WACoreDataCity.m
 //  WeatherApp
 //
-//  Created by Kenneth Pu on 7/1/14.
+//  Created by Kenneth Pu on 7/3/14.
 //  Copyright (c) 2014 Kenneth Pu. All rights reserved.
 //
 
@@ -15,14 +15,14 @@
 
 @implementation WACoreDataCity
 
-@dynamic name;
-@dynamic state;
 @dynamic imgUrl;
 @dynamic latitude;
 @dynamic longitude;
+@dynamic name;
+@dynamic state;
 @dynamic app;
 @dynamic currentWeather;
-@dynamic hourlyForecast;
 @dynamic dailyForecast;
+@dynamic hourlyForecast;
 
 @end

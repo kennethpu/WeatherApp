@@ -54,7 +54,8 @@
             newCity.imgUrl = @"http://upload.wikimedia.org/wikipedia/en/7/75/DowntownSF.jpg";
             newCity.app = app;
             [app addCitiesObject:newCity];
-            [context save:&error];
+//            [context save:&error];
+            [self saveContext];
         }
     }
     return self;
@@ -79,20 +80,46 @@
         atIndex:(int)index
 {
     NSManagedObjectContext *context = [self managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"App" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    
+    NSError *error;
+    WACoreDataApp *app = [context executeFetchRequest:request error:&error][0];
     
     WACoreDataCity *newCity = [NSEntityDescription insertNewObjectForEntityForName:@"City" inManagedObjectContext:context];
     newCity.name = city.name;
     newCity.state = city.state;
     newCity.imgUrl = city.imgUrl;
+    newCity.app = app;
     
-    NSError *error;
-    [context save:&error];
+//    [app insertObject:newCity inCitiesAtIndex:index];
+    [app addCitiesObject:newCity];
+    
+//    for (int i=0;i<[app.cities count];i++) {
+//        WACoreDataCity *city2 = [app.cities objectAtIndex:i];
+//        NSString *name = city2.name;
+//    }
+    
+//    [context save:&error];
+//    [self saveContext];
 }
 
 /// Delete a city from the currently saved cities at the provided position
 - (void)deleteCityAtIndex:(int)index
 {
     //    [cities removeObjectAtIndex:index];
+    NSManagedObjectContext *context = [self managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"App" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    
+    NSError *error;
+    WACoreDataApp *app = [context executeFetchRequest:request error:&error][0];
+    [context deleteObject:app.cities[index]];
+    [app removeObjectFromCitiesAtIndex:index];
+    
+//    [self saveContext];
 }
 
 /// Saves the downloaded images in the Documents directory

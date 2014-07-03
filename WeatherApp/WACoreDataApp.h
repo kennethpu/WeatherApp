@@ -2,7 +2,7 @@
 //  WACoreDataApp.h
 //  WeatherApp
 //
-//  Created by Kenneth Pu on 7/1/14.
+//  Created by Kenneth Pu on 7/3/14.
 //  Copyright (c) 2014 Kenneth Pu. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 
 @interface WACoreDataApp : NSManagedObject
 
-@property (nonatomic, retain) NSOrderedSet *cities;
+@property (nonatomic, strong) NSOrderedSet *cities;
 @end
 
 @interface WACoreDataApp (CoreDataGeneratedAccessors)

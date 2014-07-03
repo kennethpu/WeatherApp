@@ -2,7 +2,7 @@
 //  WACoreDataDailyWeather.h
 //  WeatherApp
 //
-//  Created by Kenneth Pu on 7/1/14.
+//  Created by Kenneth Pu on 7/3/14.
 //  Copyright (c) 2014 Kenneth Pu. All rights reserved.
 //
 
@@ -13,10 +13,10 @@
 
 @interface WACoreDataDailyWeather : NSManagedObject
 
-@property (nonatomic, retain) NSString * icon;
-@property (nonatomic, retain) NSNumber * hiTemp;
-@property (nonatomic, retain) NSNumber * loTemp;
-@property (nonatomic, retain) NSString * time;
-@property (nonatomic, retain) WACoreDataCity *city;
+@property (nonatomic, strong) NSNumber * hiTemp;
+@property (nonatomic, strong) NSString * icon;
+@property (nonatomic, strong) NSNumber * loTemp;
+@property (nonatomic, strong) NSString * time;
+@property (nonatomic, strong) WACoreDataCity *city;
 
 @end
