@@ -9,6 +9,8 @@
 #import "WALibraryAPI.h"
 #import "WAHTTPClient.h"
 #import "WAPersistencyManager.h"
+#import "WACoreDataManager.h"
+
 @interface WALibraryAPI () {
     WAPersistencyManager *persistencyManager;
     WAHTTPClient *httpClient;
